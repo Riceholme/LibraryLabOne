@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Customer>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Loans</th>
+            <th scope="col">Details</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+            <th scope="col">
+                <a asp-action="CreateACustomer" class="btn btn-sm btn-success">
+                    <i class="fa-solid fa-plus"></i> New Customer
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>
+                    <form asp-action="CustomerLoans" asp-route-id="@item.Id">
+                        <div class=" btn-group btn-group-sm">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa-solid fa-book"></i>
+                            </button>
+                        </div>
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="CustomerDetails" asp-route-id="@item.Id">
+                        <div class=" btn-group btn-group-sm">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                        </div>
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="EditCustomer" asp-route-id="@item.Id">
+                        <div class=" btn-group btn-group-sm">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure to edit this record ?')">
+                                <i class="fa-sharp fa-solid fa-pen-to-square"></i>
+                            </button>
+                        </div>
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@item.Id">
+                        <div class=" btn-group btn-group-sm">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure to delete this record ?')">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

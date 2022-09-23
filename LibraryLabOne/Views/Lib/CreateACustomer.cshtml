@@ -1,0 +1,46 @@
+﻿@model Customer
+
+@{
+    ViewData["Title"] = "Add Customer";
+}
+<div class="row">
+
+    <div class="col-md-6 offset-md-3">
+        <h1>Add a customer</h1>
+        <form asp-action="CreateACustomer" autocomplete="off">
+            
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="submit" value="Add Customer" class="btn btn-primary w-100" />
+                        </div>
+
+                        @*<div class="col-md-6">
+                            <a asp-action="CustomerList" class="btn btn-secondary w-100">EditCustomer</a>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
