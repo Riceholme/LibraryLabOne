@@ -18,6 +18,15 @@
                 <td>@item.Book.Title</td>
                 <td>@item.StartDate</td>
                 <td>@item.EndDate</td>
+                <td>
+                    <form asp-action="ReturnLoanedBook" asp-route-id="@item.Id">
+                        <div class=" btn-group btn-group-sm">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Confirm book return')">
+                                <i class="fa-solid fa-turn-down-left"></i>
+                            </button>
+                        </div>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

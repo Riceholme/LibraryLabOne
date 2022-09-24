@@ -14,7 +14,7 @@ namespace LibraryLabOne.Controllers
             _context = context;
         }
 
-        public IActionResult Loan()
+        public IActionResult LoanPage()
         {
             return View();
         }
@@ -139,6 +139,58 @@ namespace LibraryLabOne.Controllers
             }
             return NotFound();
         }
+        public async Task<IActionResult> LoanBookPage()
+        {
+            return View(await _context.Books.ToListAsync());
+        }
+        public IActionResult AddCustomerAndBookToLoan(Loan loan)
+        {
+            if (loan.CustomerId != null && loan.BookId != null)
+            {
+                var StartDateStamp = DateTime.Now;
+                var endDate = StartDateStamp.AddDays(15);
 
+                _context.Loans.Add(new Loan() { BookId = loan.BookId, CustomerId = loan.CustomerId, StartDate = StartDateStamp, EndDate = endDate });
+                _context.SaveChanges();
+                return RedirectToAction(nameof(CustomerList));
+            }
+            return RedirectToAction("Index", "Home");
+
+        }
+        public IActionResult AddBookToLoan(int id)
+        {
+            var book = _context.Books.FirstOrDefault(x => x.Id == id);
+            return RedirectToAction(nameof(LoanCustomerPage));
+        }
+        public async Task<IActionResult> LoanCustomerPage()
+        {
+            return View(await _context.Customers.ToListAsync());
+        }
+        public IActionResult AddCustomerToLoan()
+        {
+            return RedirectToAction(nameof(CustomerList));
+        }
+        public IActionResult LoanConfirmationView()
+        {
+            return View();
+        }
+        public IActionResult ReturnLoanedBook(int id)
+        {
+            if (id != 0)
+            {
+                var loanToRemove = _context.Loans.FirstOrDefault(x => x.Id == id);
+                if (loanToRemove != null)
+                {
+                    var bookOfLoan = _context.Books.FirstOrDefault(x => x.Id == loanToRemove.BookId);
+                    bookOfLoan.inStock = true;
+                    _context.Loans.Remove(loanToRemove);
+                    _context.Entry(bookOfLoan).State = EntityState.Modified;
+                    _context.SaveChanges();
+                    return View(nameof(LoanBookPage));
+                }
+                return NotFound("Loan not found");
+            }
+            return NotFound("Id was not found");
+        }
     }
 }
