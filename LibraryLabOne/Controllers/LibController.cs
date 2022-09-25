@@ -138,13 +138,22 @@ namespace LibraryLabOne.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var customer = await _context.Customers.FindAsync(id);
+            var anyLoans = _context.Loans.Any(x => x.CustomerId == id);
             if (customer != null)
             {
+                if (anyLoans == true)
+                {
+                    return RedirectToAction(nameof(DeleteError));
+                }
                 _context.Customers.Remove(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(CustomerList));
             }
             return NotFound();
+        }
+        public IActionResult DeleteError()
+        {
+            return View();
         }
         public IActionResult ReturnLoanedBook(int id)
         {
@@ -158,7 +167,7 @@ namespace LibraryLabOne.Controllers
                     _context.Loans.Remove(loanToRemove);
                     _context.Entry(bookOfLoan).State = EntityState.Modified;
                     _context.SaveChanges();
-                    
+
                 }
                 //return NotFound("Loan not found");
             }
