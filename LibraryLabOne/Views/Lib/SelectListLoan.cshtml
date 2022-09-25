@@ -1,0 +1,62 @@
+﻿@model TempLoanViewModel
+@{
+    ViewData["Title"] = "SelectListLoan";
+}
+
+@*<h2>Choose Customer and Book, then Submit</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Customers</th>
+            <th scope="col">Books</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+<tr>
+    <td> @Html.DropDownList("MyCusts", (IEnumerable
+        <SelectListItem>)ViewBag.MyCusts) </td>
+
+    <td> @Html.DropDownList("MyBooks", (IEnumerable
+        <SelectListItem>)ViewBag.MyBooks) </td>
+</tr>
+</tbody>
+<tr>
+    <td> Books </td>
+    <td> @Html.DropDownList("MyBooks", (IEnumerable
+        <SelectListItem>)ViewBag.MyBooks) </td>
+</tr>*@
+<h1>Create Loan</h1>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <form asp-action="StringDetourForFun" autocomplete="off">
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+            @*<input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="StartDate" />
+            <input type="hidden" asp-for="ReturnedDate" />
+            <input type="hidden" asp-for="EndDate" />*@
+
+            <div class="form-group">
+                <label asp-for="StringCustId" class="control-label">Customer list</label>
+                <select asp-for="StringCustId" class="form-control" asp-items="ViewBag.MyCustss"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="StringBookId" class="control-label">Booklist</label>
+                <select asp-for="StringBookId" class="form-control" asp-items="ViewBag.MyBookss"></select>
+            </div>
+
+            <div class="row">
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="submit" value="Create Loan" class="btn btn-primary w-100" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>

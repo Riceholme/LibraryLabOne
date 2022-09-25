@@ -1,6 +1,6 @@
 ﻿@model CustomerLoansViewModel
 
-<h3>@Model.Cust.FirstName</h3>
+<h3>@Model.Cust.FirstName's books</h3>
 <table class="table">
     <thead>
         <tr>
@@ -8,6 +8,7 @@
             <th scope="col">Title</th>
             <th scope="col">Loan Date</th>
             <th scope="col">Return Date</th>
+            <th scope="col">Return Book</th>
         </tr>
     </thead>
     <tbody>
@@ -22,7 +23,7 @@
                     <form asp-action="ReturnLoanedBook" asp-route-id="@item.Id">
                         <div class=" btn-group btn-group-sm">
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Confirm book return')">
-                                <i class="fa-solid fa-turn-down-left"></i>
+                                <i class="fa-solid fa-backward"></i>
                             </button>
                         </div>
                     </form>

@@ -6,6 +6,7 @@
             <th scope="col">#</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
+            @*<th scope="col">Loan Book</th>*@
             <th scope="col">Loans</th>
             <th scope="col">Details</th>
             <th scope="col">Edit</th>
@@ -24,6 +25,15 @@
                 <th scope="row">@item.Id</th>
                 <td>@item.FirstName</td>
                 <td>@item.LastName</td>
+                @*<td>
+                    <form asp-action="LoanBookPage" asp-route-id="@item.Id">
+                        <div class=" btn-group btn-group-sm">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure to edit this record ?')">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </form>
+                </td>*@
                 <td>
                     <form asp-action="CustomerLoans" asp-route-id="@item.Id">
                         <div class=" btn-group btn-group-sm">

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryLabOne.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220923091902_FirstMigration")]
+    [Migration("20220925175805_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
